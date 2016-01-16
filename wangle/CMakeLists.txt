@@ -7,8 +7,9 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS "-std=c++0x -fPIC")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+
+add_compile_options(-std=c++0x -fPIC)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -128,8 +129,8 @@ if(BUILD_TESTS)
       "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
   )
 
-  include_directories("${source_dir}/include")
-  include_directories("${source_dir}/gtest/include")
+  include_directories(SYSTEM "${source_dir}/include")
+  include_directories(SYSTEM "${source_dir}/gtest/include")
 
   macro(add_gtest test_source test_name)
   add_executable(${test_name} ${test_source})
