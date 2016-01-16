@@ -18,6 +18,15 @@ INCLUDE(FindPackageHandleStandardArgs)
 FIND_LIBRARY(FOLLY_LIBRARY folly PATHS ${FOLLY_LIBRARYDIR})
 FIND_PATH(FOLLY_INCLUDE_DIR "folly/String.h" PATHS ${FOLLY_INCLUDEDIR})
 
+if(NOT FOLLY_LIBRARY)
+  MESSAGE(SEND_ERROR "folly library could not be found. Set FOLLY_LIBRARYDIR to the directory containing the folly library.")
+endif()
+
+if(NOT FOLLY_INCLUDE_DIR)
+  MESSAGE(SEND_ERROR "folly headers could not be found. Set FOLLY_INCLUDEDIR to the directory containing "
+    "the folly headers. FOLLY_INCLUDEDIR/folly/String.h should exist.")
+endif()
+
 SET(FOLLY_LIBRARIES ${FOLLY_LIBRARY})
 
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Folly
