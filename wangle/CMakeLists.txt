@@ -18,9 +18,11 @@ find_package(Folly REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system thread)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
+find_package(double-conversion CONFIG REQUIRED NO_DEFAULT_PATH)
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/..
+  ${Boost_INCLUDE_DIRS}
   ${FOLLY_INCLUDE_DIR}
   ${INCLUDE_DIR}
 )
@@ -79,6 +81,7 @@ target_link_libraries(wangle
   ${FOLLY_LIBRARIES}
   ${Boost_LIBRARIES}
   ${OPENSSL_LIBRARIES}
+  double-conversion
   -lglog
   -lgflags
   -latomic)
